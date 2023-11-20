@@ -40,20 +40,25 @@ function App() {
   return (
     <div className="App">
       <Nav />
-      <main className="container flex flex-col justify-center max-w-2xl">
-        <Form 
-          handleSubmit={handleSubmit}
-          todo={todo}
-          setTodo={setTodo}
-        />
-        <List 
-          todoItems={todoItems}
-          todo={todo}
-          setTodo={setTodo}
-          setTodoItems={setTodoItems}
-          handleSubmit={handleSubmit}
-          handleChecked={handleChecked}
-        />
+      <main className="grid grid-cols-12 justify-center mx-auto max-w-7xl px-24">
+        <div className="col-span-4 mt-5">
+          Sidebar
+        </div>
+        <div className="main col-span-8">
+          <Form 
+            handleSubmit={handleSubmit}
+            todo={todo}
+            setTodo={setTodo}
+          />
+          <List 
+            todoItems={todoItems}
+            todo={todo}
+            setTodo={setTodo}
+            setTodoItems={setTodoItems}
+            handleSubmit={handleSubmit}
+            handleChecked={handleChecked}
+          />
+        </div>
       </main>
       
     </div>
