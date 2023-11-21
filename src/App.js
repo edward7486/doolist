@@ -1,23 +1,26 @@
 import Nav from './Nav';
 import Title from './Title';
 import List from './List';
+import Completed from './Completed';
 import Form from './Form';
 import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 function App() {
 
-  const [ todo, setTodo ] = useState('')
-  const [ todoItems, setTodoItems ] = useState([])
-  const [ projectTitle, setProjectTitle ] = useState('Untitled List')
+  const [ todo, setTodo ] = useState('');
+  const [ todoItems, setTodoItems ] = useState([]);
+  const [ completed, setCompleted ] = useState([]);
+  const [ projectTitle, setProjectTitle ] = useState('My Doolist');
 
   useEffect(() => {
+
     const data = localStorage.getItem('todos');
     if ( data ) {
       setTodoItems(JSON.parse(data));
     }
     
-  }, [])
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,16 +30,28 @@ function App() {
       checked: false
     }
     const newList = [...todoItems, todoObject];
-    console.log(newList);
     setTodoItems(newList);
     setTodo('');
     localStorage.setItem('todos', JSON.stringify(newList));
   }  
 
   const handleChecked = (id) => {
-    const newList = todoItems.map((item) => item.id === id ? {...item, checked: !item.checked } : item);
-    console.log(newList);
+    // Checking the item
+    todoItems.map(item => (
+      item.id === id ? {...item, checked: !item.checked } : item
+    ))
+    
+    // Updating completed list 
+    const itemToRemove = todoItems.filter(item => item.id === id);
+    const newCompleted = [...completed, itemToRemove[0]];
+    console.log(newCompleted);
+    setCompleted(newCompleted);
+
+    // Updating list
+    const newList = todoItems.filter((item) => item.id !== id );
     setTodoItems(newList);
+
+    // Local storage calls
     localStorage.setItem('todos', JSON.stringify(newList));
   }
 
@@ -60,6 +75,9 @@ function App() {
           setTodoItems={setTodoItems}
           handleSubmit={handleSubmit}
           handleChecked={handleChecked}
+        />
+        <Completed 
+          completed={completed}
         />
       </main>      
     </div>

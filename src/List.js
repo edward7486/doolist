@@ -12,7 +12,11 @@ const List = ({ todoItems, setTodoItems, handleSubmit, todo, setTodo, handleChec
             key={item.id} 
             handleChecked={handleChecked}
           />
-        )) : <p>You're all caught up!</p>}
+        )) : 
+        <div className="p-24 flex flex-col justify-center items-center ">
+          <p>Your todo list is empty.</p>
+          <p className="text-sm text-slate-600">Add to do items to track progress</p>
+        </div>}
       </ul>
     </>
   )
