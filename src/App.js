@@ -1,4 +1,5 @@
 import Nav from './Nav';
+import Title from './Title';
 import List from './List';
 import Form from './Form';
 import { useState, useEffect } from 'react';
@@ -8,6 +9,7 @@ function App() {
 
   const [ todo, setTodo ] = useState('')
   const [ todoItems, setTodoItems ] = useState([])
+  const [ projectTitle, setProjectTitle ] = useState('Untitled List')
 
   useEffect(() => {
     const data = localStorage.getItem('todos');
@@ -41,27 +43,25 @@ function App() {
   return (
     <div className="App">
       <Nav />
-      <main className="grid grid-cols-12 justify-center mx-auto max-w-7xl px-24">
-        <div className="col-span-4 mt-5">
-          Sidebar
-        </div>
-        <div className="main col-span-8">
-          <Form 
-            handleSubmit={handleSubmit}
-            todo={todo}
-            setTodo={setTodo}
-          />
-          <List 
-            todoItems={todoItems}
-            todo={todo}
-            setTodo={setTodo}
-            setTodoItems={setTodoItems}
-            handleSubmit={handleSubmit}
-            handleChecked={handleChecked}
-          />
-        </div>
-      </main>
-      
+      <main className="max-w-3xl px-2 sm:px-6 lg:px-8 m-auto">
+        <Title 
+          projectTitle={projectTitle}
+          setProjectTitle={setProjectTitle}
+        />
+        <Form 
+          handleSubmit={handleSubmit}
+          todo={todo}
+          setTodo={setTodo}
+        />
+        <List 
+          todoItems={todoItems}
+          todo={todo}
+          setTodo={setTodo}
+          setTodoItems={setTodoItems}
+          handleSubmit={handleSubmit}
+          handleChecked={handleChecked}
+        />
+      </main>      
     </div>
   );
 }
