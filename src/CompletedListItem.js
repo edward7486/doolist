@@ -6,16 +6,13 @@ const CompletedListItem = ({ item }) => {
       <input 
         type="checkbox"
         id={ item.id } 
-        className="w-4 h-4 align-middle checked:bg-green-500"
+        className="w-4 h-4 align-middle accent-slate-200"
         checked
-        readOnly
+        disabled
       /> 
       <label 
-        className="ml-2 align-middle" 
+        className="ml-2 align-middle text-slate-500" 
         htmlFor={ item.id } 
-        style={{
-          textDecoration:"line-through", color:"text-slate-200" 
-        }}
       >
         { item.name }
       </label>

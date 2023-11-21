@@ -13,7 +13,7 @@ const List = ({ todoItems, setTodoItems, handleSubmit, todo, setTodo, handleChec
             handleChecked={handleChecked}
           />
         )) : 
-        <div className="p-24 flex flex-col justify-center items-center ">
+        <div className="p-16 flex flex-col justify-center items-center ">
           <p>Your todo list is empty.</p>
           <p className="text-sm text-slate-600">Add to do items to track progress</p>
         </div>}
