@@ -9,7 +9,7 @@ const ListItem = ({ item, handleChecked }) => {
         id={ item.id } 
         className="w-4 h-4 align-middle cursor-pointer"
         onChange={(e)=> handleChecked(item.id)}
-        checked = {item.checked ? true : false}
+        checked = { item.checked ? true : false }
       /> 
       <label 
         className="ml-2 align-middle cursor-pointer" 

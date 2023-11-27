@@ -58,23 +58,28 @@ function App() {
   }
 
   const handleChecked = (id) => {
-    // Checking the item
-    todoItems.map(item => (
-      item.id === id ? {...item, checked: !item.checked } : item
-    ))
-    
-    // Updating completed list 
-    const itemToRemove = todoItems.filter(item => item.id === id);
-    const newCompleted = [...completed, itemToRemove[0]];
-    setCompleted(newCompleted);
-    localStorage.setItem('completedItems', JSON.stringify(newCompleted));
 
-    // Updating list
-    const newList = todoItems.filter((item) => item.id !== id );
+    // Reflecting the checked state in the list
+    const newList = todoItems.map((item) => item.id === id ? { ...item, checked: !item.checked} : item);
     setTodoItems(newList);
 
-    // Local storage calls
-    localStorage.setItem('todos', JSON.stringify(newList));
+    // Adding a delay so the move and check can be seen by the user
+    setTimeout(() => {
+      // Updating the completed list
+      const itemToRemove = todoItems.filter(item => item.id === id);
+      const newCompleted = [...completed, itemToRemove[0]];
+      setCompleted(newCompleted);
+      localStorage.setItem('completedItems', JSON.stringify(newCompleted));
+
+      // Updating list to remove the checked item
+      const newList = todoItems.filter((item) => item.id !== id );
+      setTodoItems(newList);
+
+      // Local storage call to store the new todo list
+      localStorage.setItem('todos', JSON.stringify(newList));
+    }, 500)
+
+
   }
 
   return (

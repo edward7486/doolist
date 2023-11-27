@@ -9,7 +9,10 @@ const Completed = ({ completed, setCompleted }) => {
         <p className=' text-slate-400'>Completed Items</p>
         <button 
           className="ml-2 text-sm text-slate-500 font-bold bg-slate-100 px-2 py-1 rounded-full hover:bg-slate-200"
-          onClick={(e) => setCompleted([])}
+          onClick={(e) => (
+            setCompleted([]),
+            localStorage.setItem('completedItems', [])
+          )}
         >
             Clear
         </button>
