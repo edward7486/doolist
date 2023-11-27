@@ -54,11 +54,8 @@ const EditProject = ({ title, projectSettings, setProjectSettings }) => {
               checked={projectSettings.showCompletedList ? 'checked' : ''}
             />
             <label htmlFor='completedCheckbox' className='align-middle'>Show completed tasks</label>
-            <button className='bg-sky-700 text-white px-4 py-2 rounded-md block' type="submit">Save</button>
+            <button className='bg-indigo-700 text-white px-4 py-2 rounded-md block mt-2' type="submit">Done</button>
           </form>
-        </div>
-        <div className="modal-footer">
-
         </div>
       </div>
 

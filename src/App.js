@@ -31,7 +31,6 @@ function App() {
     const fetchTitle = localStorage.getItem('projectTitle');
     const fetchCompletedState = localStorage.getItem('completedState');
     setProjectSettings({projectTitle: fetchTitle, showCompletedList: JSON.parse(fetchCompletedState)});
-    console.log(fetchCompletedState);
 
     // Fetch completed items list
     const fetchCompleted = localStorage.getItem('completedItems');
