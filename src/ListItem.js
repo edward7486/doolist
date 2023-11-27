@@ -7,18 +7,19 @@ const ListItem = ({ item, handleChecked }) => {
       <input 
         type="checkbox"
         id={ item.id } 
-        className="w-4 h-4 align-middle"
+        className="w-4 h-4 align-middle cursor-pointer"
         onChange={(e)=> handleChecked(item.id)}
         checked = {item.checked ? true : false}
       /> 
       <label 
-        className="ml-2 align-middle" 
+        className="ml-2 align-middle cursor-pointer" 
         htmlFor={ item.id } 
         style={ item.checked ? {textDecoration:"line-through"} : null }
       >
         { item.name }
       </label>
       <EllipsisHorizontalIcon className='w-6 h-6 float-right text-slate-500 hidden group-hover:block'/>
+      <span className="tooltiptext hidden">Tooltip text</span>
     </li>
   )
 }
