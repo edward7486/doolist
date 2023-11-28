@@ -1,8 +1,12 @@
 import React from 'react'
 import { Cog8ToothIcon } from '@heroicons/react/24/outline'
+import { useContext } from 'react';
+import DataContext from './context/DataContext';
 
-const Title = ({ projectTitle }) => {
+const Title = () => {
   
+  const { projectSettings } = useContext(DataContext);
+
   const openEditProject = () => {
     const modal = document.getElementById('editProject');
     modal.classList.remove('hidden')
@@ -10,7 +14,9 @@ const Title = ({ projectTitle }) => {
   
   return (
     <div className="flex justify-between items-center mt-5">
-      <h1 className="text-xl block font-bold mt-2 mb-2">{projectTitle}</h1>
+      <h1 className="text-xl block font-bold mt-2 mb-2">
+        {projectSettings.projectTitle}
+      </h1>
       <div className='group relative'>      
         <Cog8ToothIcon
           className="h-8 w-8 p-1 hover:bg-slate-100 rounded-md text-slate-500 cursor-pointer"

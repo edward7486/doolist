@@ -1,7 +1,12 @@
 import React from 'react'
 import CompletedListItem from './CompletedListItem'
+import { useContext } from 'react'
+import DataContext from './context/DataContext'
 
-const Completed = ({ completed, setCompleted }) => {
+const Completed = () => {
+  
+  const { completed, setCompleted } = useContext(DataContext);
+  
   return (
     <>
       <hr className='mb-5'/>
@@ -14,11 +19,16 @@ const Completed = ({ completed, setCompleted }) => {
             localStorage.setItem('completedItems', [])
           )}
         >
-            Clear
+          Clear
         </button>
       </div>
       <ul className='completedList'>
-        { completed.map((item) => <CompletedListItem key={item.id} item={item}/>)}
+        { completed.map((item) => 
+          <CompletedListItem 
+            key={item.id} 
+            item={item}
+          />
+        )}
       </ul>
     </>
   )

@@ -1,8 +1,12 @@
 import React from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import { useContext } from 'react'
+import DataContext from './context/DataContext'
 
-const EditProject = ({ title, projectSettings, setProjectSettings }) => {
+const EditProject = ({ title }) => {
   
+  const { projectSettings, setProjectSettings } = useContext(DataContext);
+
   const handleClose = () => {
     const modal = document.getElementById('editProject');
     modal.classList.add('hidden')

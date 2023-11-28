@@ -1,7 +1,11 @@
 import React from 'react'
 import ListItem from './ListItem'
+import { useContext } from 'react'
+import DataContext from './context/DataContext'
 
-const List = ({ todoItems, setTodoItems, handleSubmit, todo, setTodo, handleChecked }) => {
+const List = () => {
+
+  const { todoItems } = useContext(DataContext);
 
   return (
     <>
@@ -10,7 +14,6 @@ const List = ({ todoItems, setTodoItems, handleSubmit, todo, setTodo, handleChec
           <ListItem 
             item={item} 
             key={item.id} 
-            handleChecked={handleChecked}
           />
         )) : 
         <div className="p-16 flex flex-col justify-center items-center ">
