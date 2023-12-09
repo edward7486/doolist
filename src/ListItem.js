@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 import DataContext from './context/DataContext';
-import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline'
+import { TrashIcon } from '@heroicons/react/24/outline'
 
 const ListItem = ({ item }) => {
   
@@ -30,6 +30,11 @@ const ListItem = ({ item }) => {
     }, 500)
   }
 
+  const handleDelete = (id) => {
+    const newList = todoItems.filter((item) => item.id !== id)
+    setTodoItems(newList);
+  }
+
   return (
     <li className='px-2 py-2 group hover:bg-slate-50'>
       <input 
@@ -46,7 +51,10 @@ const ListItem = ({ item }) => {
       >
         { item.name }
       </label>
-      <EllipsisHorizontalIcon className='w-6 h-6 float-right text-slate-500 hidden group-hover:block'/>
+      <TrashIcon 
+        className='w-6 h-6 float-right text-slate-500 hidden group-hover:block cursor-pointer hover:text-red-500'
+        onClick={(e) => handleDelete(item.id)}
+      />
       <span className="tooltiptext hidden">Tooltip text</span>
     </li>
   )

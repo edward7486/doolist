@@ -8,6 +8,7 @@ export const DataProvider = ({ children }) => {
   const [ todo, setTodo ] = useState('');
   const [ todoItems, setTodoItems ] = useState([]);
   const [ completed, setCompleted ] = useState([]);
+  const [ editProjectIsOpen, setEditProjectIsOpen ] = useState(false);
   const [ projectSettings, setProjectSettings ] = useState(
     {
       projectTitle: 'My Doolist',
@@ -43,7 +44,8 @@ export const DataProvider = ({ children }) => {
       todoItems, setTodoItems, 
       completed, setCompleted,
       projectSettings, setProjectSettings,
-      todo, setTodo
+      todo, setTodo,
+      editProjectIsOpen, setEditProjectIsOpen
     }}>
      {children} 
     </DataContext.Provider>

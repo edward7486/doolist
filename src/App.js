@@ -4,6 +4,7 @@ import List from './List';
 import Completed from './Completed';
 import Form from './Form';
 import EditProject from './EditProject';
+import EditPanel from './EditPanel';
 import DataContext from './context/DataContext';
 import { useContext } from 'react';
 
@@ -19,6 +20,7 @@ function App() {
         <Title />
         <Form />
         <EditProject title={'Project Settings'} />
+        <EditPanel />
         <List />
         { projectSettings.showCompletedList && <Completed /> }
       </main>

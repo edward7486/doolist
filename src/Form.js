@@ -4,7 +4,7 @@ import DataContext from './context/DataContext';
 
 const Form = () => {
 
-  const { todo, setTodo, todoItems, setTodoItems } = useContext(DataContext);
+  const { todo, setTodo, todoItems, setTodoItems, projectSettings } = useContext(DataContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +30,7 @@ const Form = () => {
         <input 
           autoFocus
           type="text" 
-          placeholder="Add to do item"
+          placeholder={`Add item to ${projectSettings.projectTitle}`}
           className="border-solid border-2 px-2 py-2 mb-2 rounded-md w-full"
           value={todo}
           onChange={(e) => { setTodo(e.target.value) } }
