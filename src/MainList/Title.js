@@ -1,7 +1,7 @@
 import React from 'react'
 import { Cog8ToothIcon } from '@heroicons/react/24/outline'
 import { useContext } from 'react';
-import DataContext from './context/DataContext';
+import DataContext from '../context/DataContext';
 
 const Title = () => {
   

@@ -1,7 +1,8 @@
 import React from 'react';
 import { useContext } from 'react';
-import DataContext from './context/DataContext';
+import DataContext from '../context/DataContext';
 import { TrashIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom';
 
 const ListItem = ({ item }) => {
   
@@ -44,13 +45,15 @@ const ListItem = ({ item }) => {
         onChange={(e)=> handleChecked(item.id)}
         checked = { item.checked ? true : false }
       /> 
-      <label 
-        className="ml-2 align-middle cursor-pointer" 
-        htmlFor={ item.id } 
-        style={ item.checked ? {textDecoration:"line-through"} : null }
-      >
-        { item.name }
-      </label>
+      <Link to={`/task/${item.id}`}>
+        <label 
+          className="ml-2 align-middle cursor-pointer" 
+          htmlFor={ item.id } 
+          style={ item.checked ? {textDecoration:"line-through"} : null }
+        >
+          { item.name }
+        </label>
+      </Link>
       <TrashIcon 
         className='w-6 h-6 float-right text-slate-500 hidden group-hover:block cursor-pointer hover:text-red-500'
         onClick={(e) => handleDelete(item.id)}

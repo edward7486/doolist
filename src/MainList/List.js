@@ -1,7 +1,8 @@
 import React from 'react'
 import ListItem from './ListItem'
 import { useContext } from 'react'
-import DataContext from './context/DataContext'
+import DataContext from '../context/DataContext'
+import { Outlet } from 'react-router-dom'
 
 const List = () => {
 
@@ -21,6 +22,7 @@ const List = () => {
           <p className="text-sm text-slate-600">Add to do items to track progress</p>
         </div>}
       </ul>
+      <Outlet />
     </>
   )
 }

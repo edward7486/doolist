@@ -1,32 +1,33 @@
-import Nav from './Nav';
-import Title from './Title';
-import List from './List';
-import Completed from './Completed';
-import Form from './Form';
-import EditProject from './EditProject';
-import EditPanel from './EditPanel';
-import DataContext from './context/DataContext';
-import { useContext } from 'react';
+import React from 'react';
+import AppLayer from './AppLayer/AppLayer';
+import MainApp from './MainList/MainApp.js';
+import EditPanel from './EditPanel.js';
+import { 
+  RouterProvider,
+  createBrowserRouter
+ } from 'react-router-dom';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: AppLayer,
+    children: [
+      {
+        path: "/",
+        Component: MainApp,
+        children: [
+          {
+            path: "task/:id",
+            Component: EditPanel,
+          },
+        ],
+      },
+    ],
+  },
+]);
 
 function App() {
-
-  const { projectSettings } = useContext(DataContext)
-
-  return (
-    <div className="App">
-
-      <Nav />
-      <main className="max-w-3xl px-2 sm:px-6 lg:px-8 m-auto">
-        <Title />
-        <Form />
-        <EditProject title={'Project Settings'} />
-        <EditPanel />
-        <List />
-        { projectSettings.showCompletedList && <Completed /> }
-      </main>
-
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

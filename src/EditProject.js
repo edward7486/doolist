@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useContext } from 'react'
 import DataContext from './context/DataContext'
 
 const EditProject = ({ title }) => {
   
-  const { projectSettings, setProjectSettings, handleClose, editProjectIsOpen, setEditProjectIsOpen } = useContext(DataContext);
+  const { projectSettings, setProjectSettings, editProjectIsOpen, setEditProjectIsOpen } = useContext(DataContext);
 
   const editProject = (e) => {
+    e.preventDefault();
     setProjectSettings({
       projectTitle: e.target[0].value,
       showCompletedList: e.target[1].checked
@@ -21,7 +22,6 @@ const EditProject = ({ title }) => {
     <>
     {( editProjectIsOpen && 
       <div id="editProject" className="modal">
-
         <div className="modal-content rounded-md max-w-xl divide-y bg-white">
           <div className="modal-header flex place-content-between p-4">
             <h2 className='text-lg font-bold'>{title}</h2>
@@ -32,7 +32,7 @@ const EditProject = ({ title }) => {
             />
           </div>
           <div className="modal-body p-4">
-            <form onSubmit={editProject}>
+            <form onSubmit={(e) => editProject(e)}>
               <label htmlFor='titleInput'>Project Name</label>
               <input 
                 autoFocus

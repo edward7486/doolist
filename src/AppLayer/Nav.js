@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { Disclosure } from '@headlessui/react'
 
-export default function Example() {
+export default function Nav() {
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
