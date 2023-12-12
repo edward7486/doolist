@@ -1,6 +1,7 @@
 import React from 'react'
 import { useContext } from 'react';
 import DataContext from '../context/DataContext';
+import DateObject from 'react-date-object';
 
 const Form = () => {
 
@@ -12,7 +13,8 @@ const Form = () => {
     const todoObject = {
       id: uniqueId(),
       name: todo,
-      checked: false
+      checked: false,
+      created: new DateObject().format('MM/DD/YYYY')
     }
     const newList = [...todoItems, todoObject];
     setTodoItems(newList);

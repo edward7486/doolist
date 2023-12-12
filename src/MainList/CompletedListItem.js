@@ -1,6 +1,7 @@
 import React from 'react'
 import { useContext } from 'react'
 import DataContext from '../context/DataContext'
+import { Link } from 'react-router-dom'
 
 const CompletedListItem = ({ item }) => {
   
@@ -31,16 +32,18 @@ const CompletedListItem = ({ item }) => {
       <input 
         type="checkbox"
         id={ item.id } 
-        className="w-4 h-4 align-middle accent-slate-200 cursor-pointer"
+        className="w-4 h-4 align-middle accent-slate-500 cursor-pointer"
         onChange={(e) => handleCompletedCheck(item.id)}
         checked={ item.checked ? true : false }
-      /> 
-      <label 
-        className="ml-2 align-middle text-slate-500 cursor-pointer" 
-        htmlFor={ item.id } 
-      >
-        { item.name }
-      </label>
+      />
+      <Link to={`/task/${item.id}`}>
+        <label 
+          className="ml-2 align-middle text-slate-500 cursor-pointer line-through" 
+          htmlFor={ item.id } 
+        >
+          { item.name }
+        </label>
+      </Link>
     </li>
   )
 }
