@@ -11,6 +11,7 @@ const EditPanel = () => {
 
   const { todoItems, completed, projectSettings, handleChecked, handleCompletedCheck } = useContext(DataContext);
   
+  // Storing locally so if user refreshes the page the context is preserved(?)
   localStorage.setItem('localToDos', JSON.stringify(todoItems));
   localStorage.setItem('localCompleted', JSON.stringify(completed))
 
@@ -77,7 +78,7 @@ const EditPanel = () => {
             </div>
           </div>
 
-          <div className='edit-sidebar col-span-4 text-xs bg-slate-100 p-4 space-y-3 text-slate-700'>
+          <div className='edit-sidebar col-span-4 text-xs bg-slate-50 p-4 space-y-3 text-slate-700'>
             <div>
               <span className='block font-semibold'>Added</span>
               <div className='mt-1'>

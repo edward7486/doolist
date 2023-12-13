@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const CompletedListItem = ({ item }) => {
   
-  const { completed, setCompleted, todoItems, setTodoItems, handleCompletedCheck } = useContext(DataContext);
+  const { handleCompletedCheck } = useContext(DataContext);
 
   return (
     <li className='px-2 py-2 bg-slate-100'>
