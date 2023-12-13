@@ -9,7 +9,7 @@ import { useContext } from 'react'
 
 const EditPanel = () => {
 
-  const { todoItems, completed, projectSettings } = useContext(DataContext);
+  const { todoItems, completed, projectSettings, handleChecked, handleCompletedCheck } = useContext(DataContext);
   
   localStorage.setItem('localToDos', JSON.stringify(todoItems));
   localStorage.setItem('localCompleted', JSON.stringify(completed))
@@ -45,8 +45,16 @@ const EditPanel = () => {
             <div>          
               <input 
                 type="checkbox"
-                className={`inline-block w-4 h-4 mr-2 ${ completedItem.checked ? 'accent-slate-500' : ''}`}
+                className={`inline-block w-4 h-4 mr-2 cursor-pointer ${ completedItem.checked ? 'accent-slate-500' : ''}`}
                 checked={ todo.checked || completedItem.checked ? 'checked' : null}
+                onChange={((e) => {
+                    if (todo.checked === false) {
+                      handleChecked(todo.id)
+                    } else if (completedItem.checked === true) {
+                      handleCompletedCheck(completedItem.id)
+                    }
+                  }
+                )}
               />
               <h2 className={`text-lg font-bold inline-block ${ completedItem.checked ? 'line-through': '' }`}>
                 {todo.name || completedItem.name} 

@@ -38,6 +38,49 @@ export const DataProvider = ({ children }) => {
     }
     
   }, []);  
+
+  const handleChecked = (id) => {
+
+    // Reflecting the checked state in the list
+    const checkedList = todoItems.map((item) => item.id === id ? { ...item, checked: !item.checked} : item);
+    setTodoItems(checkedList);
+
+    // Adding a delay so the move and check can be seen by the user
+    setTimeout(() => {
+      // Updating the completed list
+      const itemToRemove = checkedList.filter(item => item.id === id);
+      const newCompleted = [...completed, itemToRemove[0]];
+      setCompleted(newCompleted);
+      localStorage.setItem('completedItems', JSON.stringify(newCompleted));
+
+      // Updating list to remove the checked item
+      const newList = todoItems.filter((item) => item.id !== id );
+      setTodoItems(newList);
+
+      // Local storage call to store the new todo list
+      localStorage.setItem('todos', JSON.stringify(newList));
+    }, 500)
+  }  
+
+  const handleCompletedCheck = (id) => {
+    
+    // Editing the completed list to make the item checked: false
+    const newCompletedCheckedList = completed.map((item) => item.id === id ? {...item, checked: !item.checked} : item )
+    setCompleted(newCompletedCheckedList)
+
+    const itemToRemove = newCompletedCheckedList.filter(item => item.id === id);
+
+    // Adding the removed item to the undone todos
+    const newToDos = [...todoItems, itemToRemove[0]];
+    setTodoItems(newToDos);
+    localStorage.setItem('todos', JSON.stringify(newToDos));
+
+    // Updating the completed list to remove the item
+    const newList = newCompletedCheckedList.filter(item => item.id !== id);
+    setCompleted(newList);
+    localStorage.setItem('completedItems', JSON.stringify(newList));
+
+  }
   
   return (
     <DataContext.Provider value={{
@@ -45,7 +88,8 @@ export const DataProvider = ({ children }) => {
       completed, setCompleted,
       projectSettings, setProjectSettings,
       todo, setTodo,
-      editProjectIsOpen, setEditProjectIsOpen
+      editProjectIsOpen, setEditProjectIsOpen,
+      handleChecked, handleCompletedCheck
     }}>
      {children} 
     </DataContext.Provider>

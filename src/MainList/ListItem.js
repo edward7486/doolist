@@ -6,30 +6,7 @@ import { Link } from 'react-router-dom';
 
 const ListItem = ({ item }) => {
   
-  const { todoItems, setTodoItems, completed, setCompleted } = useContext(DataContext);
-
-  const handleChecked = (id) => {
-
-    // Reflecting the checked state in the list
-    const checkedList = todoItems.map((item) => item.id === id ? { ...item, checked: !item.checked} : item);
-    setTodoItems(checkedList);
-
-    // Adding a delay so the move and check can be seen by the user
-    setTimeout(() => {
-      // Updating the completed list
-      const itemToRemove = checkedList.filter(item => item.id === id);
-      const newCompleted = [...completed, itemToRemove[0]];
-      setCompleted(newCompleted);
-      localStorage.setItem('completedItems', JSON.stringify(newCompleted));
-
-      // Updating list to remove the checked item
-      const newList = todoItems.filter((item) => item.id !== id );
-      setTodoItems(newList);
-
-      // Local storage call to store the new todo list
-      localStorage.setItem('todos', JSON.stringify(newList));
-    }, 500)
-  }
+  const { todoItems, setTodoItems, handleChecked } = useContext(DataContext);
 
   const handleDelete = (id) => {
     const newList = todoItems.filter((item) => item.id !== id)

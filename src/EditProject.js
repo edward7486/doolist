@@ -45,7 +45,7 @@ const EditProject = ({ title }) => {
               <input 
                 type="checkbox"
                 id="completedCheckbox"
-                className='mr-2 my-4 h-4 w-4 accent-indigo-500 relative align-middle'
+                className='mr-2 my-4 h-4 w-4 accent-indigo-500 relative align-middle cursor-pointer'
                 onChange={(e) => (
                   setProjectSettings(
                     { ...projectSettings, 
@@ -54,7 +54,7 @@ const EditProject = ({ title }) => {
                 )}
                 checked={projectSettings.showCompletedList ? 'checked' : ''}
               />
-              <label htmlFor='completedCheckbox' className='align-middle'>Show completed tasks</label>
+              <label htmlFor='completedCheckbox' className='align-middle cursor-pointer'>Show completed tasks</label>
               <button className='bg-indigo-700 text-white px-4 py-2 rounded-md block mt-2' type="submit">Done</button>
             </form>
           </div>
