@@ -1,4 +1,5 @@
 import React from 'react'
+import Comment from './Comment'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { 
   useNavigate,
@@ -46,7 +47,7 @@ const EditPanel = () => {
             <div>          
               <input 
                 type="checkbox"
-                className={`inline-block w-4 h-4 mr-2 cursor-pointer ${ completedItem.checked ? 'accent-slate-500' : ''}`}
+                className={`inline-block w-4 h-4 mr-2 cursor-pointer align-middle ${ completedItem.checked ? 'accent-slate-500' : ''}`}
                 checked={ todo.checked || completedItem.checked ? 'checked' : null}
                 onChange={((e) => {
                     if (todo.checked === false) {
@@ -57,23 +58,38 @@ const EditPanel = () => {
                   }
                 )}
               />
-              <h2 className={`text-lg font-bold inline-block ${ completedItem.checked ? 'line-through': '' }`}>
-                {todo.name || completedItem.name} 
+              <h2 className={`text-lg text-slate-700 font-bold inline-block align-middle ${ completedItem.checked ? 'line-through': '' }`}>
+               {todo.name || completedItem.name} 
               </h2>
             </div>
 
-            <div className="comment-section mt-8">
-              <h2 className='text-xs text-slate-700 font-semibold'>Comments</h2>
-              <div className='comments'>
-
+            <div className="comment-section mt-4 space-y-1">
+              <h2 className='text-xs text-slate-700 font-semibold'>History</h2>
+              <div className='comment'>
+                <div className='bg-slate-100 p-2 text-slate-700 rounded-md'>
+                  <span className='text-xs'>12/12/23 6:00PM</span>
+                  <div className='text-sm'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fermentum suscipit sem ut rutrum. Quisque eu magna et nibh blandit vehicula. Suspendisse et sagittis neque.</div>
+                </div>
               </div>
-              <form>
-                <input 
+              <div className='comment'>
+                <div className='bg-slate-100 p-2 text-slate-700 rounded-md'>
+                  <span className='text-xs'>12/12/23 6:00PM</span>
+                  <div className='text-sm'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fermentum suscipit sem ut rutrum. Quisque eu magna et nibh blandit vehicula. Suspendisse et sagittis neque.</div>
+                </div>
+              </div>
+              <form className='w-full'>
+                <textarea 
                   autoFocus
                   type="text"
                   placeholder="Add comment"
-                  className='p-1 mt-2 w-full'
+                  className='p-2 mt-2 mr-2 w-full border-2 rounded-md'
                 />
+                <button 
+                  type="submit"
+                  className='bg-indigo-700 text-white px-3 py-1 rounded-md inline-block'
+                >
+                  Save
+                </button>
               </form>
             </div>
           </div>
