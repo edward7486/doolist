@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const ListItem = ({ item }) => {
   
-  const { todoItems, setTodoItems, handleChecked } = useContext(DataContext);
+  const { todoItems, setTodoItems, handleChecked, handleEditPanel } = useContext(DataContext);
 
   const handleDelete = (id) => {
     const newList = todoItems.filter((item) => item.id !== id)
@@ -22,11 +22,14 @@ const ListItem = ({ item }) => {
         onChange={(e)=> handleChecked(item.id)}
         checked = { item.checked ? true : false }
       /> 
-      <Link to={`/task/${item.id}`}>
+      <Link 
+        to={`/task/${item.id}`}
+      >
         <label 
           className="ml-2 align-middle cursor-pointer" 
           htmlFor={ item.id } 
           style={ item.checked ? {textDecoration:"line-through"} : null }
+          onClick={(e) => handleEditPanel(true)}
         >
           { item.name }
         </label>

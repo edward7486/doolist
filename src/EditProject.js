@@ -55,7 +55,7 @@ const EditProject = ({ title }) => {
                 checked={projectSettings.showCompletedList ? 'checked' : ''}
               />
               <label htmlFor='completedCheckbox' className='align-middle cursor-pointer'>Show completed tasks</label>
-              <button className='bg-indigo-700 text-white px-4 py-2 rounded-md block mt-2' type="submit">Done</button>
+              <button className='bg-indigo-700 hover:bg-indigo-800 text-white px-4 py-2 rounded-md block mt-2' type="submit">Done</button>
             </form>
           </div>
         </div>

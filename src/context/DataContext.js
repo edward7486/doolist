@@ -9,6 +9,7 @@ export const DataProvider = ({ children }) => {
   const [ todoItems, setTodoItems ] = useState([]);
   const [ completed, setCompleted ] = useState([]);
   const [ editProjectIsOpen, setEditProjectIsOpen ] = useState(false);
+  const [ editPanelOpen, setEditPanelOpen ] = useState(JSON.parse(localStorage.getItem('editPanelState')));
   const [ projectSettings, setProjectSettings ] = useState(
     {
       projectTitle: 'My Doolist',
@@ -37,7 +38,13 @@ export const DataProvider = ({ children }) => {
       setCompleted(JSON.parse(fetchCompleted));
     }
     
+    document.body.style.overflow = "auto";
+    
   }, []);  
+
+  const handleEditPanel = (boolean) => {
+    setEditPanelOpen(boolean);
+  }
 
   const handleChecked = (id) => {
 
@@ -89,7 +96,9 @@ export const DataProvider = ({ children }) => {
       projectSettings, setProjectSettings,
       todo, setTodo,
       editProjectIsOpen, setEditProjectIsOpen,
-      handleChecked, handleCompletedCheck
+      handleChecked, handleCompletedCheck,
+      handleEditPanel,
+      editPanelOpen, setEditPanelOpen
     }}>
      {children} 
     </DataContext.Provider>
