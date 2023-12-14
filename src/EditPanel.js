@@ -64,7 +64,7 @@ const EditPanel = () => {
               <input 
                 type="checkbox"
                 className={`inline-block w-5 h-5 mr-2 cursor-pointer align-middle ${ completedItem.checked ? 'accent-slate-500' : ''}`}
-                checked={ todo.checked || completedItem.checked ? 'checked' : null}
+                checked={ todo.checked || completedItem.checked ? 'checked' : false}
                 onChange={((e) => {
                     if (todo.checked === false) {
                       handleChecked(todo.id)
