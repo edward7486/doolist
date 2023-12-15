@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Comment from './Comment'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { 
@@ -12,28 +12,23 @@ const EditPanel = () => {
 
   const { 
     todoItems, 
-    completed, 
     projectSettings, 
     handleChecked, 
-    handleCompletedCheck, 
     handleEditPanel,
     editPanelOpen
   } = useContext(DataContext);
   
   // Storing locally so if user refreshes the page the context is preserved(?)
   localStorage.setItem('localToDos', JSON.stringify(todoItems));
-  localStorage.setItem('localCompleted', JSON.stringify(completed))
   localStorage.setItem('editPanelState', JSON.stringify(editPanelOpen));
-  
   let navigate = useNavigate();
   let { id } = useParams();
+
   let todo = 
     todoItems.find((t) => (t.id.toString() === id)) || 
     JSON.parse(localStorage.getItem('localToDos'));
-  let completedItem = 
-    completed.find((c) => (c.id.toString() === id)) || 
-    JSON.parse(localStorage.getItem('localCompleted'));
 
+  // Prevent background scroll on edit panel open
   if (editPanelOpen === true || null ) {
     document.body.style.overflow = "hidden";
   } else if (editPanelOpen === false) {
@@ -63,19 +58,12 @@ const EditPanel = () => {
             <div>          
               <input 
                 type="checkbox"
-                className={`inline-block w-5 h-5 mr-2 cursor-pointer align-middle ${ completedItem.checked ? 'accent-slate-500' : ''}`}
-                checked={ todo.checked || completedItem.checked ? 'checked' : false}
-                onChange={((e) => {
-                    if (todo.checked === false) {
-                      handleChecked(todo.id)
-                    } else if (completedItem.checked === true) {
-                      handleCompletedCheck(completedItem.id)
-                    }
-                  }
-                )}
+                className={`inline-block w-5 h-5 mr-2 cursor-pointer align-middle ${todo.checked ? 'accent-slate-500' : ''}`}
+                checked={ todo.checked ? 'checked' : false}
+                onChange={(e) => handleChecked(todo.id)} 
               />
-              <h2 className={`text-lg text-slate-700 font-bold inline-block align-middle ${ completedItem.checked ? 'line-through': '' }`}>
-               {todo.name || completedItem.name} 
+              <h2 className={`text-lg font-bold inline-block align-middle ${todo.checked ? 'line-through' : ''}`}>
+               {todo.name} 
               </h2>
             </div>
             <form className='w-full mt-4' onSubmit={(e) => e.preventDefault()}>
@@ -83,7 +71,7 @@ const EditPanel = () => {
                 autoFocus
                 type="text"
                 placeholder="Add comment"
-                className='p-2 mt-2 mr-2 w-full border-2 rounded-md'
+                className='p-2 mt-2 mr-2 w-full border-2 rounded-md text-sm'
               />
               <button 
                 type="submit"
@@ -126,7 +114,7 @@ const EditPanel = () => {
             <div>
               <span className='block font-semibold'>Added</span>
               <div className='mt-1'>
-                <span>{todo.created || completedItem.created}</span>
+                <span>{todo.created}</span>
               </div>              
             </div>         
           </div>

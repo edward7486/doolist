@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const CompletedListItem = ({ item }) => {
   
-  const { handleCompletedCheck } = useContext(DataContext);
+  const { handleChecked } = useContext(DataContext);
 
   return (
     <li className='px-2 py-2 bg-slate-100'>
@@ -13,7 +13,7 @@ const CompletedListItem = ({ item }) => {
         type="checkbox"
         id={ item.id } 
         className="w-4 h-4 align-middle accent-slate-500 cursor-pointer"
-        onChange={(e) => handleCompletedCheck(item.id)}
+        onChange={(e) => handleChecked(item.id)}
         checked={ item.checked ? true : false }
       />
       <Link to={`/task/${item.id}`}>
