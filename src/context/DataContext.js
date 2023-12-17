@@ -43,6 +43,10 @@ export const DataProvider = ({ children }) => {
     localStorage.setItem('todos', JSON.stringify(checkedList));
 
   }  
+
+  const uniqueId = () => {
+    return Math.floor((Date.now() * Math.random()) / 1000);
+  }
   
   return (
     <DataContext.Provider value={{
@@ -52,7 +56,8 @@ export const DataProvider = ({ children }) => {
       editProjectIsOpen, setEditProjectIsOpen,
       handleChecked,
       handleEditPanel,
-      editPanelOpen, setEditPanelOpen
+      editPanelOpen, setEditPanelOpen,
+      uniqueId
     }}>
      {children} 
     </DataContext.Provider>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Comment from './Comment'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { 
@@ -7,26 +7,30 @@ import {
  } from 'react-router-dom'
 import DataContext from './context/DataContext'
 import { useContext } from 'react'
+import DateObject from 'react-date-object';
 
 const EditPanel = () => {
 
   const { 
-    todoItems, 
+    todoItems,
+    setTodoItems, 
     projectSettings, 
     handleChecked, 
     handleEditPanel,
-    editPanelOpen
+    editPanelOpen,
+    uniqueId
   } = useContext(DataContext);
   
-  // Storing locally so if user refreshes the page the context is preserved(?)
-  localStorage.setItem('localToDos', JSON.stringify(todoItems));
-  localStorage.setItem('editPanelState', JSON.stringify(editPanelOpen));
   let navigate = useNavigate();
   let { id } = useParams();
+  const [ comment, setComment ] = useState('');
 
-  let todo = 
-    todoItems.find((t) => (t.id.toString() === id)) || 
-    JSON.parse(localStorage.getItem('localToDos'));
+  // Storing locally so if user refreshes the page the context is preserved
+  localStorage.setItem('localToDos', JSON.stringify(todoItems));
+  localStorage.setItem('editPanelState', JSON.stringify(editPanelOpen));
+
+  let todo = todoItems.find((t) => (t.id.toString() === id)) || localStorage.getItem('todo');
+  localStorage.setItem('todo', JSON.stringify(todo));
 
   // Prevent background scroll on edit panel open
   if (editPanelOpen === true || null ) {
@@ -38,7 +42,23 @@ const EditPanel = () => {
   function onDismiss() {
     navigate(-1);
     handleEditPanel(false);
-  }
+  };
+
+  const handleCommentSubmit = (e, id) => {
+    e.preventDefault();
+    const newList = todoItems.map((item) => item.id === id ? { ...item, comments: [ ...item.comments, 
+      {
+        comment,
+        id: uniqueId(),
+        timestamp: new DateObject().format('MM/DD/YYYY, hh:mm a')
+      }
+     ] } : item);
+    setTodoItems(newList);
+    localStorage.setItem('todos', JSON.stringify(newList));
+    setComment('');
+
+    // also need to figure out how to reverse the array so that the newest comments are first (on top of the list in the UI).
+  };
 
   return (
     <div className='modal edit-panel'>
@@ -66,12 +86,14 @@ const EditPanel = () => {
                {todo.name} 
               </h2>
             </div>
-            <form className='w-full mt-4' onSubmit={(e) => e.preventDefault()}>
+            <form className='w-full mt-4' onSubmit={(e) => handleCommentSubmit(e, todo.id)}>
               <textarea 
                 autoFocus
                 type="text"
                 placeholder="Add comment"
                 className='p-2 mt-2 mr-2 w-full border-2 rounded-md text-sm'
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
               />
               <button 
                 type="submit"
@@ -82,31 +104,15 @@ const EditPanel = () => {
             </form>
             <div className="comment-section mt-2 space-y-1">
               <h2 className='text-xs text-slate-700 font-semibold'>History</h2>
-              <div className='comment'>
-                <div className='bg-slate-100 p-2 text-slate-700 rounded-md'>
-                  <span className='text-xs'>12/12/23 6:00PM</span>
-                  <div className='text-sm'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fermentum suscipit sem ut rutrum. Quisque eu magna et nibh blandit vehicula. Suspendisse et sagittis neque.</div>
-                </div>
-              </div>
-              <div className='comment'>
-                <div className='bg-slate-100 p-2 text-slate-700 rounded-md'>
-                  <span className='text-xs'>12/12/23 6:00PM</span>
-                  <div className='text-sm'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fermentum suscipit sem ut rutrum. Quisque eu magna et nibh blandit vehicula. Suspendisse et sagittis neque.</div>
-                </div>
-              </div>
-              <div className='comment'>
-                <div className='bg-slate-100 p-2 text-slate-700 rounded-md'>
-                  <span className='text-xs'>12/12/23 6:00PM</span>
-                  <div className='text-sm'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fermentum suscipit sem ut rutrum. Quisque eu magna et nibh blandit vehicula. Suspendisse et sagittis neque.</div>
-                </div>
-              </div>
-              <div className='comment'>
-                <div className='bg-slate-100 p-2 text-slate-700 rounded-md'>
-                  <span className='text-xs'>12/12/23 6:00PM</span>
-                  <div className='text-sm'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fermentum suscipit sem ut rutrum. Quisque eu magna et nibh blandit vehicula. Suspendisse et sagittis neque.</div>
-                </div>
-              </div>              
-
+              {( 
+                todo.comments ?
+                todo.comments.map((comment) => (
+                  <Comment 
+                    comment={comment}
+                    key={comment.id}
+                  />
+                )) : <p>There are no comments</p> 
+              )}            
             </div>
           </div>
 

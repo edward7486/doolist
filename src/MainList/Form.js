@@ -5,7 +5,7 @@ import DateObject from 'react-date-object';
 
 const Form = () => {
 
-  const { todo, setTodo, todoItems, setTodoItems, projectSettings } = useContext(DataContext);
+  const { todo, setTodo, todoItems, setTodoItems, projectSettings, uniqueId } = useContext(DataContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,17 +14,14 @@ const Form = () => {
       id: uniqueId(),
       name: todo,
       checked: false,
-      created: new DateObject().format('MM/DD/YYYY, hh:mm a')
+      created: new DateObject().format('MM/DD/YYYY, hh:mm a'),
+      comments: []
     }
     const newList = [...todoItems, todoObject];
     setTodoItems(newList);
     setTodo('');
     localStorage.setItem('todos', JSON.stringify(newList));
   }  
-
-  const uniqueId = () => {
-    return Math.floor((Date.now() * Math.random()) / 1000);
-  }
 
   return (
     <>
