@@ -89,6 +89,7 @@ const EditPanel = () => {
             <form className='w-full mt-4' onSubmit={(e) => handleCommentSubmit(e, todo.id)}>
               <textarea 
                 autoFocus
+                required
                 type="text"
                 placeholder="Add comment"
                 className='p-2 mt-2 mr-2 w-full border-2 rounded-md text-sm'
@@ -103,16 +104,18 @@ const EditPanel = () => {
               </button>
             </form>
             <div className="comment-section mt-2 space-y-1">
-              <h2 className='text-xs text-slate-700 font-semibold'>History</h2>
-              {( 
-                todo.comments ?
-                todo.comments.map((comment) => (
-                  <Comment 
-                    comment={comment}
-                    key={comment.id}
-                  />
-                )) : <p>There are no comments</p> 
-              )}            
+              <h2 className='text-xs text-slate-700 font-semibold my-2'>Comments</h2>
+              <div className='space-y-3'>
+                {( 
+                  todo.comments ?
+                  todo.comments.map((comment) => (
+                    <Comment 
+                      comment={comment}
+                      key={comment.id}
+                    />
+                  )) : <p>There are no comments</p> 
+                )}
+              </div>            
             </div>
           </div>
 
