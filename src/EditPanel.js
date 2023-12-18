@@ -29,7 +29,8 @@ const EditPanel = () => {
   localStorage.setItem('localToDos', JSON.stringify(todoItems));
   localStorage.setItem('editPanelState', JSON.stringify(editPanelOpen));
 
-  let todo = todoItems.find((t) => (t.id.toString() === id)) || localStorage.getItem('todo');
+  let todo = todoItems.find((t) => (t.id.toString() === id)) || 
+  localStorage.getItem('todo');
   localStorage.setItem('todo', JSON.stringify(todo));
 
   // Prevent background scroll on edit panel open
@@ -57,7 +58,6 @@ const EditPanel = () => {
     localStorage.setItem('todos', JSON.stringify(newList));
     setComment('');
 
-    // also need to figure out how to reverse the array so that the newest comments are first (on top of the list in the UI).
   };
 
   return (
@@ -91,7 +91,7 @@ const EditPanel = () => {
                 autoFocus
                 required
                 type="text"
-                placeholder="Add comment"
+                placeholder="Add a comment"
                 className='p-2 mt-2 mr-2 w-full border-2 rounded-md text-sm'
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
@@ -104,7 +104,6 @@ const EditPanel = () => {
               </button>
             </form>
             <div className="comment-section mt-2 space-y-1">
-              <h2 className='text-xs text-slate-700 font-semibold my-2'>Comments</h2>
               <div className='space-y-3'>
                 {( 
                   todo.comments ?
