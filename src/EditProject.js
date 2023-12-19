@@ -23,8 +23,8 @@ const EditProject = ({ title }) => {
     {( editProjectIsOpen && 
       <div id="editProject" className="modal">
         <div className="modal-content rounded-md max-w-xl divide-y bg-white">
-          <div className="modal-header flex place-content-between p-4">
-            <h2 className='text-lg font-bold'>{title}</h2>
+          <div className="modal-header flex place-content-between items-center px-4 py-2">
+            <h2 className='text-sm font-semibold text-slate-700'>{title}</h2>
             <XMarkIcon 
               className='close h-7 w-7 p-1 hover:bg-slate-100 rounded-md text-slate-500'
               onClick={(e) => setEditProjectIsOpen(false)}
@@ -54,7 +54,7 @@ const EditProject = ({ title }) => {
                 )}
                 checked={projectSettings.showCompletedList ? 'checked' : ''}
               />
-              <label htmlFor='completedCheckbox' className='align-middle cursor-pointer'>Show completed tasks</label>
+              <label htmlFor='completedCheckbox' className='align-middle cursor-pointer'>Show completed items</label>
               <button className='bg-indigo-700 hover:bg-indigo-800 text-white px-4 py-2 rounded-md block mt-2' type="submit">Done</button>
             </form>
           </div>

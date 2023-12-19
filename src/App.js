@@ -2,6 +2,7 @@ import React from 'react';
 import AppLayer from './AppLayer/AppLayer';
 import MainApp from './MainList/MainApp.js';
 import EditPanel from './EditPanel.js';
+import DeleteModal from './DeleteModal.js';
 import { 
   RouterProvider,
   createBrowserRouter
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
           {
             path: "task/:id",
             Component: EditPanel,
+          },
+          {
+            path: "task/:id/delete?",
+            Component: DeleteModal,
           },
         ],
       },

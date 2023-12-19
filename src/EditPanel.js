@@ -47,18 +47,34 @@ const EditPanel = () => {
 
   const handleCommentSubmit = (e, id) => {
     e.preventDefault();
-    const newList = todoItems.map((item) => item.id === id ? { ...item, comments: [ ...item.comments, 
-      {
-        comment,
-        id: uniqueId(),
-        timestamp: new DateObject().format('MM/DD/YYYY, hh:mm a')
-      }
-     ] } : item);
-    setTodoItems(newList);
-    localStorage.setItem('todos', JSON.stringify(newList));
-    setComment('');
+    const theItem = todoItems.find((item) => item.id === id);
 
-  };
+    if (Object.hasOwn(theItem, 'comments')) {
+      const newList = todoItems.map((item) => item.id === id ? { ...item, 
+        comments: [ ...item.comments, 
+        {
+          comment,
+          id: uniqueId(),
+          timestamp: new DateObject().format('MM/DD/YYYY, hh:mm a')
+        }
+       ] } : item)
+       setTodoItems(newList);
+       localStorage.setItem('todos', JSON.stringify(newList));
+      } else {
+        const newList2 = todoItems.map((item) => item.id === id ? { ...item,
+          comments: [
+            {
+              comment,
+              id: uniqueId(),
+              timestamp: new DateObject().format('MM/DD/YYYY, hh:mm a')          
+            }
+          ]
+        } : item)
+        setTodoItems(newList2);
+        localStorage.setItem('todos', JSON.stringify(newList2));
+    }  
+    setComment('');
+  }
 
   return (
     <div className='modal edit-panel'>
@@ -104,6 +120,7 @@ const EditPanel = () => {
               </button>
             </form>
             <div className="comment-section mt-2 space-y-1">
+              <span className='font-semibold text-xs'>Comments</span>
               <div className='space-y-3'>
                 {( 
                   todo.comments ?
@@ -112,7 +129,7 @@ const EditPanel = () => {
                       comment={comment}
                       key={comment.id}
                     />
-                  )) : <p>There are no comments</p> 
+                  )) : <p className='text-slate-500 text-sm'>There are no comments</p> 
                 )}
               </div>            
             </div>

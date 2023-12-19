@@ -14,8 +14,7 @@ const Form = () => {
       id: uniqueId(),
       name: todo,
       checked: false,
-      created: new DateObject().format('MM/DD/YYYY, hh:mm a'),
-      comments: []
+      created: new DateObject().format('MM/DD/YYYY, hh:mm a')
     }
     const newList = [...todoItems, todoObject];
     setTodoItems(newList);
