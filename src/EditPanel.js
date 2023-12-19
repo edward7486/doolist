@@ -106,6 +106,7 @@ const EditPanel = () => {
               <textarea 
                 autoFocus
                 required
+                name="add a comment"
                 type="text"
                 placeholder="Add a comment"
                 className='p-2 mt-2 mr-2 w-full border-2 rounded-md text-sm'

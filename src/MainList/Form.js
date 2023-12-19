@@ -28,6 +28,7 @@ const Form = () => {
         <input 
           autoFocus
           type="text" 
+          name="add todo"
           placeholder={`Add item to ${projectSettings.projectTitle}`}
           className="border-solid border-2 px-2 py-2 mb-2 rounded-md w-full"
           value={todo}
