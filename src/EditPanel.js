@@ -26,7 +26,6 @@ const EditPanel = () => {
   const [ comment, setComment ] = useState('');
 
   // Storing locally so if user refreshes the page the context is preserved
-  localStorage.setItem('localToDos', JSON.stringify(todoItems));
   localStorage.setItem('editPanelState', JSON.stringify(editPanelOpen));
 
   let todo = todoItems.find((t) => (t.id.toString() === id)) || 

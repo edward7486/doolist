@@ -22,7 +22,7 @@ const router = createBrowserRouter([
             Component: EditPanel,
           },
           {
-            path: "task/:id/delete?",
+            path: "task/:id/delete",
             Component: DeleteModal,
           },
         ],

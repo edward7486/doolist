@@ -8,11 +8,6 @@ const ListItem = ({ item }) => {
   
   const { todoItems, setTodoItems, handleChecked, handleEditPanel } = useContext(DataContext);
 
-  const handleDelete = (id) => {
-    const newList = todoItems.filter((item) => item.id !== id)
-    setTodoItems(newList);
-  }
-
   return (
     <li className='px-2 py-2 group hover:bg-slate-50'>
       <input 
@@ -22,9 +17,7 @@ const ListItem = ({ item }) => {
         onChange={(e)=> handleChecked(item.id)}
         checked = { item.checked ? true : false }
       /> 
-      <Link 
-        to={`/task/${item.id}`}
-      >
+      <Link to={`/task/${item.id}`}>
         <label 
           className="ml-2 align-middle cursor-pointer" 
           htmlFor={ item.id } 
@@ -34,10 +27,11 @@ const ListItem = ({ item }) => {
           { item.name }
         </label>
       </Link>
-      <TrashIcon 
-        className='w-6 h-6 float-right text-slate-500 hidden group-hover:block cursor-pointer hover:text-red-500'
-        onClick={(e) => handleDelete(item.id)}
-      />
+      <Link to={`/task/${item.id}/delete`}>
+        <TrashIcon 
+          className='w-6 h-6 float-right text-slate-500 hidden group-hover:block cursor-pointer hover:text-red-500'
+        />
+      </Link>
       <span className="tooltiptext hidden">Tooltip text</span>
     </li>
   )
