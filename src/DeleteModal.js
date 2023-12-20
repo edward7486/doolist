@@ -30,7 +30,7 @@ const DeleteModal = () => {
         <div className="modal-body mt-2">
           <div className='p-4'>
             <p>Are you sure you want to delete task <span className='font-semibold'>{`${todo.name}`}</span> ?</p>
-            <div className='flex justify-end space-x-2 mt-4'>
+            <div className='flex space-x-2 mt-4'>
               <button 
                 className='bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded-md mt-2 inline-block'
                 onClick={(e) => handleDelete(todo.id)}
