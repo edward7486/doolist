@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useContext } from 'react';
 import DataContext from './context/DataContext'
-import { InformationCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline';
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 
 const DeleteModal = () => {
 

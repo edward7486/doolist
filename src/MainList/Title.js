@@ -9,7 +9,7 @@ const Title = () => {
 
   return (
     <div className="flex justify-between items-center mt-5">
-      <h1 className="text-xl block font-bold mt-2 mb-2">
+      <h1 className="text-lg block font-semibold mt-2 mb-2">
         {projectSettings.projectTitle}
       </h1>
       <div className='group relative'>      
