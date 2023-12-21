@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useContext } from 'react';
 import DataContext from './context/DataContext'
+import { InformationCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline';
 
 const DeleteModal = () => {
 
@@ -29,14 +30,22 @@ const DeleteModal = () => {
       
         <div className="modal-body mt-2">
           <div className='p-4'>
-            <p>Are you sure you want to delete task <span className='font-semibold'>{`${todo.name}`}</span> ?</p>
-            <div className='flex space-x-2 mt-3'>
+            <p>
+              <ExclamationCircleIcon 
+                className='text-slate-400 w-6 h-6 mb-1'
+              /> 
+              Are you sure you want to delete  
+              <span className='font-semibold'>
+                {` ${todo.name}`}
+              </span> ?
+            </p>
+            <div className='flex space-x-2 mt-2'>
               <button 
                 className='bg-red-700 hover:bg-red-800 text-white px-3 py-1 rounded-md mt-2 inline-block'
                 onClick={(e) => handleDelete(todo.id)}
               >Delete</button>
               <button 
-                className='bg-slate-500 hover:bg-slate-600 text-white px-3 py-1 rounded-md inline-block mt-2'
+                className='bg-slate-400 hover:bg-slate-600 text-white px-3 py-1 rounded-md inline-block mt-2'
                 onClick={onDismiss}
               >Cancel</button>
             </div>
