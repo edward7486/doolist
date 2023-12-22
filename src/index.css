@@ -30,3 +30,36 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;  
+}
+
+.status-select {
+  position: relative;
+}
+
+.status-select::before,
+.status-select::after {
+  --size: 0.3rem;
+  position: absolute;
+  content: "";
+  right: 0.75rem;
+  pointer-events: none; 
+}
+
+.status-select::before {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-bottom: var(--size) solid black;
+  top: 60%;  
+}
+
+.status-select::after {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-top: var(--size) solid black;
+  top: 75%;  
+}

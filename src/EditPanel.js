@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useId, useEffect } from 'react'
 import Comment from './Comment'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { 
@@ -12,15 +12,17 @@ import DateObject from 'react-date-object';
 const EditPanel = () => {
 
   const { 
-    todoItems,
-    setTodoItems, 
+    todoItems, setTodoItems, 
     projectSettings, 
     handleChecked, 
     handleEditPanel,
+    handleStatusChange,
     editPanelOpen,
-    uniqueId
+    uniqueId,
+    status, setStatus
   } = useContext(DataContext);
   
+  const statusSelectId = useId();
   let navigate = useNavigate();
   let { id } = useParams();
   const [ comment, setComment ] = useState('');
@@ -31,6 +33,10 @@ const EditPanel = () => {
   let todo = todoItems.find((t) => (t.id.toString() === id)) || 
   localStorage.getItem('todo');
   localStorage.setItem('todo', JSON.stringify(todo));
+
+  useEffect(function setTheStatus() {
+    setStatus(todo.status);
+  }, [setStatus, todo.status])
 
   // Prevent background scroll on edit panel open
   if (editPanelOpen === true || null ) {
@@ -136,12 +142,28 @@ const EditPanel = () => {
           </div>
 
           <div className='edit-sidebar col-span-4 text-xs bg-slate-50 p-4 space-y-3 text-slate-700'>
+
+            <div className='status-select'>
+              <label htmlFor={statusSelectId} className='block font-semibold'>Status</label>
+              <select 
+                className="mt-1 px-2 py-1 w-full rounded-md border-solid border-2 border-slate-200 text-sm"
+                id={statusSelectId}
+                value={status}
+                onChange={(e) => handleStatusChange(e, todo.id)}
+              >
+                <option value="open" className='text-sm'>Open</option>
+                <option value="inProgress" className='text-sm'>In Progress</option>
+                <option value="completed" className='text-sm'>Completed</option>
+              </select>
+            </div>   
+
             <div>
               <span className='block font-semibold'>Added</span>
               <div className='mt-1'>
                 <span>{todo.created}</span>
               </div>              
-            </div>         
+            </div>
+
           </div>
 
         </div>

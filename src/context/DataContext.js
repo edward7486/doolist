@@ -9,6 +9,7 @@ export const DataProvider = ({ children }) => {
   const [ todoItems, setTodoItems ] = useState([]);
   const [ editProjectIsOpen, setEditProjectIsOpen ] = useState(false);
   const [ editPanelOpen, setEditPanelOpen ] = useState(JSON.parse(localStorage.getItem('editPanelState')));
+  const [ status, setStatus ] = useState('');
   const [ projectSettings, setProjectSettings ] = useState(
     {
       projectTitle: 'My Doolist',
@@ -16,7 +17,7 @@ export const DataProvider = ({ children }) => {
     }
   );
 
-  useEffect(() => {
+  useEffect( function fetchFromLocalStorage () {
 
     // Todos from local storage
     const todos = localStorage.getItem('todos');
@@ -44,6 +45,14 @@ export const DataProvider = ({ children }) => {
 
   }  
 
+  const handleStatusChange = (e, id) => {
+    e.preventDefault();
+    setStatus(e.target.value);
+    const newStatusList = todoItems.map((item) => item.id === id ? { ...item, status: e.target.value } : item);
+    setTodoItems(newStatusList);
+    localStorage.setItem('todos', JSON.stringify(newStatusList));
+  }
+
   const uniqueId = () => {
     return Math.floor((Date.now() * Math.random()) / 1000);
   }
@@ -56,8 +65,10 @@ export const DataProvider = ({ children }) => {
       editProjectIsOpen, setEditProjectIsOpen,
       handleChecked,
       handleEditPanel,
+      handleStatusChange,
       editPanelOpen, setEditPanelOpen,
-      uniqueId
+      uniqueId,
+      status, setStatus
     }}>
      {children} 
     </DataContext.Provider>

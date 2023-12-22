@@ -9,7 +9,6 @@ const List = () => {
   const undone = todoItems
     .filter(item => item.checked === false);
 
-
   return (
     <>
       <ul className="divide-y">
