@@ -38,19 +38,32 @@ export const DataProvider = ({ children }) => {
 
   const handleChecked = (id) => {
 
-    // Reflecting the checked state in the list
-    const checkedList = todoItems.map((item) => item.id === id ? { ...item, checked: !item.checked} : item);
-    setTodoItems(checkedList);
-    localStorage.setItem('todos', JSON.stringify(checkedList));
+    const theItem = todoItems.find((item) => item.id === id);
+    if (theItem.checked === false) {
+      const checkedList = todoItems.map((item) => item.id === id ? { ...item, checked: true, status: 'completed'} : item);
+      setTodoItems(checkedList);
+      localStorage.setItem('todos', JSON.stringify(checkedList));
+    } else if (theItem.checked === true) {
+      const checkedList = todoItems.map((item) => item.id === id ? { ...item, checked: false, status: 'open'} : item);
+      setTodoItems(checkedList);
+      localStorage.setItem('todos', JSON.stringify(checkedList));
+    }
 
   }  
 
   const handleStatusChange = (e, id) => {
     e.preventDefault();
     setStatus(e.target.value);
-    const newStatusList = todoItems.map((item) => item.id === id ? { ...item, status: e.target.value } : item);
-    setTodoItems(newStatusList);
-    localStorage.setItem('todos', JSON.stringify(newStatusList));
+    if (e.target.value === 'completed') {
+      const newStatusList = todoItems.map((item) => item.id === id ? { ...item, status: e.target.value, checked: true } : item);
+      setTodoItems(newStatusList);
+      localStorage.setItem('todos', JSON.stringify(newStatusList));  
+    } else if (e.target.value === 'open' || 'inProgress'){
+      const newStatusList = todoItems.map((item) => item.id === id ? { ...item, status: e.target.value, checked: false } : item);
+      setTodoItems(newStatusList);
+      localStorage.setItem('todos', JSON.stringify(newStatusList));
+    }
+
   }
 
   const uniqueId = () => {
