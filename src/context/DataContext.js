@@ -63,7 +63,6 @@ export const DataProvider = ({ children }) => {
       setTodoItems(newStatusList);
       localStorage.setItem('todos', JSON.stringify(newStatusList));
     }
-
   }
 
   const uniqueId = () => {
