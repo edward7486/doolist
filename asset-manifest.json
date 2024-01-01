@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/doolist/static/css/main.2df6208b.css",
+    "main.js": "/doolist/static/js/main.ee194951.js",
+    "index.html": "/doolist/index.html",
+    "main.2df6208b.css.map": "/doolist/static/css/main.2df6208b.css.map",
+    "main.ee194951.js.map": "/doolist/static/js/main.ee194951.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2df6208b.css",
+    "static/js/main.ee194951.js"
+  ]
+}
