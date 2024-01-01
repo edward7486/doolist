@@ -1,7 +1,7 @@
 {
   "name": "doolist",
   "version": "0.1.0",
-  "homepage": "https://edward7486.github.io/doolist",
+  "homepage": "https://edwardux.com/doolist",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.7.17",
