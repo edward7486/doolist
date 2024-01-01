@@ -10,6 +10,7 @@ import {
 
 const router = createBrowserRouter([
   {
+    basename: "/doolist/",
     path: "/",
     Component: AppLayer,
     children: [
