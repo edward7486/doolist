@@ -2,6 +2,7 @@
 My first React web application. Yet another to do list beginner project but I wanted to spice it up and make it more challenging for my own learning. Some of the key features:
 
 - You can mark and unmark to dos as done, as well as delete them
+- When you click to delete, there is a modal dialog asking for confirmation
 - Clicking on a todo's label opens an "edit panel", a more detailed view of that item
 - From the edit panel you can add comments to your todo, mark them done/undone and set a status
 - Interacting with the status to make it open or complete will mark it undone or done accordingly
