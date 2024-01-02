@@ -12,6 +12,7 @@ My first React web application. Yet another to do list beginner project but I wa
 # Future updates
 
 - I plan to add a "card view" and afford "drag and dropping" of items to sort the list. The card view will also allow dragging to update the status from "open" to "complete" or "in progress"
+- The ability to add more projects 
 
 # Details
 - This application uses local storage for now as I'm still learning
