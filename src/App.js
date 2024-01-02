@@ -5,12 +5,11 @@ import EditPanel from './EditPanel.js';
 import DeleteModal from './DeleteModal.js';
 import { 
   RouterProvider,
-  createBrowserRouter
+  createHashRouter
  } from 'react-router-dom';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
-    basename: "/doolist/",
     path: "/",
     Component: AppLayer,
     children: [
